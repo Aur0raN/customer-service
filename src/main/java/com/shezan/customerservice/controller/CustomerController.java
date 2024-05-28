@@ -2,6 +2,7 @@ package com.shezan.customerservice.controller;
 
 
 import com.shezan.customerservice.model.Customer;
+import com.shezan.customerservice.model.CustomerHistory;
 import com.shezan.customerservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,21 @@ public class CustomerController {
     @PutMapping("update")
     public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) {
         return customerService.updateCustomer(customer);
+    }
+
+    @PostMapping("borrowItem")
+    public ResponseEntity<String> borrowItem(@RequestParam  Integer itemId, @RequestParam Integer customerId) {
+        return customerService.borrowItem(itemId, customerId);
+    }
+
+    @PostMapping("returnItem")
+    public ResponseEntity<String> returnItem(@RequestParam  Integer itemId, @RequestParam Integer customerId) {
+        return customerService.returnItem(itemId, customerId);
+    }
+
+    @GetMapping("customerHistory")
+    public ResponseEntity<List<CustomerHistory>> getCustomerHistory(@RequestParam Integer customerId) {
+        return customerService.getCustomerHistory(customerId);
     }
 
 
